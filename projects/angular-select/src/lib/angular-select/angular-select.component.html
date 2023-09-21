@@ -4,29 +4,44 @@
       <input
         (input)="handleSearch($event)"
         (focus)="toggleList(true)"
+        (blur)="toggleList(false)"
         [value]="currentLabel"
         placeholder="Search"
         type="text"
         class="border rounded-l px-3 py-2 border-r-0 w-full"
       />
-      <button (click)="toggleList(!listStatus)" class="p-2 border rounded-r">
-        O
+      <button (click)="toggleList(!showList)" class="border rounded-r px-1">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="feather feather-chevron-down"
+        >
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
       </button>
     </div>
     <div
       class="h-64 overflow-y-scroll relative"
       id="select-item-list"
       (scroll)="handleScroll($event)"
+      *ngIf="showList"
     >
       <div *ngFor="let item of data" class="#select-item-list">
         <button
           (mousedown)="handleItemSelect(item)"
-          class="text-sm p-1 border-b border-x hover:bg-green-500 w-full text-left bg-blue-200"
+          class="text-sm p-1 border-b border-x hover:bg-blue-50 w-full text-left"
         >
           {{ item.label }}
-      </button>
+        </button>
       </div>
-      <div class="w-full p-1 top-0 border" *ngIf="pendingData">Loading...</div>
+      <div class="w-full p-1 top-0 border bg-blue-200 font-semibold" *ngIf="pendingData">Loading...</div>
     </div>
   </div>
 </div>

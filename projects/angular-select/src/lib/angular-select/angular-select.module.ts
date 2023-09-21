@@ -7,4 +7,4 @@ import { AngularSelectComponent } from './angular-select.component';
   imports: [CommonModule],
   exports: [AngularSelectComponent],
 })
-export class SampleLibModule {}
+export class AngularSelectModule {}

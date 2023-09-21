@@ -17,7 +17,7 @@ export class AngularSelectComponent {
   data: any = [];
   currentLabel: string = '';
   searchValue: string = '';
-  listStatus: boolean = false;
+  showList: boolean = false;
   currentPage: number = 1;
   pendingData: boolean = false;
 
@@ -25,11 +25,16 @@ export class AngularSelectComponent {
     this.currentLabel = e.target.value;
     this.searchValue = e.target.value;
     this.currentPage = 1;
-    this.getData(this.currentPage, this.searchValue);
+
+    this.getData(this.currentPage, this.searchValue).then((data) => {
+      this.pendingData = false;
+      this.data = data;
+    });
   }
 
   handleItemSelect(e: SelectOption) {
     this.currentLabel = e.label;
+    this.showList = false;
     this.onChange.emit(e);
   }
 
@@ -50,7 +55,7 @@ export class AngularSelectComponent {
   }
 
   toggleList(status: boolean) {
-    this.listStatus = status;
+    this.showList = status;
   }
 
   ngOnInit() {
