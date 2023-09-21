@@ -1,15 +1,20 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { SelectOption } from 'dist/angular-select';
 
 @Component({
-  selector: 'lib-sample-lib',
+  selector: 'angular-select',
   templateUrl: './angular-select.component.html',
 })
 export class AngularSelectComponent {
   constructor() {}
-  @Input() getData: (page: number, search: string) => Promise<{ value: any; label: string }[]>;
+  @Input() getData: (
+    page: number,
+    search: string
+  ) => Promise<{ value: any; label: string }[]>;
+  @Output() onChange: EventEmitter<SelectOption> =
+    new EventEmitter<SelectOption>();
   title = 'angular-select';
   data: any = [];
-  currentValue: any = {};
   currentLabel: string = '';
   searchValue: string = '';
   listStatus: boolean = false;
@@ -23,9 +28,9 @@ export class AngularSelectComponent {
     this.getData(this.currentPage, this.searchValue);
   }
 
-  handleItemSelect(e: any) {
-    this.currentValue = e.value;
+  handleItemSelect(e: SelectOption) {
     this.currentLabel = e.label;
+    this.onChange.emit(e);
   }
 
   onScrollEnd() {
