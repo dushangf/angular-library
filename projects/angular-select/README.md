@@ -1,5 +1,7 @@
 # AngularSelect
 
+[Live Demo](https://dushangf.github.io/angular-select-demo/)
+
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
 
 ## Installation and Usage
@@ -64,6 +66,21 @@ onChange(e: { label: string, value: any }) {
 ## Styles
 
 At the moment, this component strictly depends on tailwindcss so its required in your project for it to work as expected.
+
+Make sure the content array in your project's tailwind.config.js looks silimar to this.
+
+```
+module.exports = {
+  content: [
+    "./src/**/*.{html,ts}",
+    "./node_modules/@dushangf/angular-select/**/*.{html,ts,js,mjs}"
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
 
 Further improvements such as changing styles via props will be introduces soon!
 

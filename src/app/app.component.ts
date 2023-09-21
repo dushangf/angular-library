@@ -14,7 +14,6 @@ export class AppComponent {
   }
   title = 'angular-packages';
   selectedValue: any;
-  chevronDown: any;
 
   async getData(page: number, search: string) {
     const res = await axios.get(
