@@ -1,0 +1,32 @@
+<div class="p-10">
+  <div class="w-64">
+    <div class="w-full flex">
+      <input
+        (input)="handleSearch($event)"
+        (focus)="toggleList(true)"
+        [value]="currentLabel"
+        placeholder="Search"
+        type="text"
+        class="border rounded-l px-3 py-2 border-r-0 w-full"
+      />
+      <button (click)="toggleList(!listStatus)" class="p-2 border rounded-r">
+        O
+      </button>
+    </div>
+    <div
+      class="h-64 overflow-y-scroll relative"
+      id="select-item-list"
+      (scroll)="handleScroll($event)"
+    >
+      <div *ngFor="let item of data" class="#select-item-list">
+        <button
+          (mousedown)="handleItemSelect(item)"
+          class="text-sm p-1 border-b border-x hover:bg-green-500 w-full text-left bg-blue-200"
+        >
+          {{ item.label }}
+      </button>
+      </div>
+      <div class="w-full p-1 top-0 border" *ngIf="pendingData">Loading...</div>
+    </div>
+  </div>
+</div>

@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AngularSelectComponent } from './angular-select.component';
 
-describe('AngularSelectComponent', () => {
+describe('SampleLibComponent', () => {
   let component: AngularSelectComponent;
   let fixture: ComponentFixture<AngularSelectComponent>;
 
