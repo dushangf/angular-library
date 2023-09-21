@@ -2,23 +2,69 @@
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
 
-## Code scaffolding
+## Installation and Usage
 
-Run `ng generate component component-name --project angular-select` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project angular-select`.
-> Note: Don't forget to add `--project angular-select` or else it will be added to the default project in your `angular.json` file. 
+`npm install @dushangf/angular-select`
 
-## Build
+Import AngularSelectModule and include it in the imports array inside the module you wish to use the component in.
 
-Run `ng build angular-select` to build the project. The build artifacts will be stored in the `dist/` directory.
+`import { AngularSelectModule } from '@dushangf/angular-select`
 
-## Publishing
+```
+@NgModule({
+  declarations: [AppComponent],
+  imports: [BrowserModule, AngularSelectModule],
+  providers: [],
+  bootstrap: [AppComponent],
+})
+```
 
-After building your library with `ng build angular-select`, go to the dist folder `cd dist/angular-select` and run `npm publish`.
+The example is on **app.module.ts** this may change depending on the module you want to use this in (**your-component.module.ts**).
 
-## Running unit tests
+In your template file use the `<angular-select></angular-select>` tags.
 
-Run `ng test angular-select` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Props
 
-## Further help
+### getData
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+(page: number, search: string) => Promise<{ label: string, value: any }>
+```
+
+This takes up the two arguments **page** and **search**. The function with the api fetch has to be defined and passed to the _getData_ prop.
+
+```
+async getData(page: number, search: string) {
+    const res = await axios.get(`http://your-api.com?page=${page}&search=${search}`)
+
+    return res.data.map(item => ({ label: item.name, value: item }))
+}
+```
+
+Internally the select component will increase the page number, fetch the data and add it to the select options list every time the user scrolls to the end of the list.
+
+Additionally everytime the user enters a string in the input the page will reset to **1** and fetch the data with the search string (_will continue to increase page on scroll end_).
+
+### onChange
+
+(e: { label: string, value: any }) => void
+
+This defines what the select has to do when the user selects and option from the list.
+
+Ideally you can have a local state variable in your component and set it to the options value on change.
+
+```
+selectedOption: any;
+
+onChange(e: { label: string, value: any }) {
+    this.selectedOption = e.value;
+}
+```
+
+## Styles
+
+At the moment, this component strictly depends on tailwindcss so its required in your project for it to work as expected.
+
+Further improvements such as changing styles via props will be introduces soon!
+
+### Good Luck!

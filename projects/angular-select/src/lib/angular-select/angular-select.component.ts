@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SelectOption } from 'dist/angular-select';
+import { SelectOption } from '../../public-api';
 
 @Component({
   selector: 'angular-select',
@@ -25,7 +25,6 @@ export class AngularSelectComponent {
     this.currentLabel = e.target.value;
     this.searchValue = e.target.value;
     this.currentPage = 1;
-
     this.getData(this.currentPage, this.searchValue).then((data) => {
       this.pendingData = false;
       this.data = data;

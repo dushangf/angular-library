@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import axios from 'axios';
+import { SelectOption } from '@dushangf/angular-select';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,7 @@ export class AppComponent {
     return res.data.map((item: any) => ({ label: item.name, value: item }));
   }
 
-  onChange(e: { label: string; value: any }) {
+  onChange(e: SelectOption) {
     this.selectedValue = e.value;
   }
 }
